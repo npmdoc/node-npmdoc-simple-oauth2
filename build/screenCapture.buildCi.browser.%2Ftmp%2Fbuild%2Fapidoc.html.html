@@ -1,0 +1,182 @@
+<html><head></head><body><div class="apidocDiv">
+<style>
+/*csslint
+*/
+.apidocDiv {
+    background: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.apidocDiv a[href] {
+    color: #33f;
+    font-weight: bold;
+    text-decoration: none;
+}
+.apidocDiv a[href]:hover {
+    text-decoration: underline;
+}
+.apidocCodeCommentSpan {
+    background: #bbf;
+    color: #000;
+    display: block;
+}
+.apidocCodeKeywordSpan {
+    color: #d00;
+    font-weight: bold;
+}
+.apidocCodePre {
+    background: #eef;
+    border: 1px solid;
+    color: #777;
+    padding: 5px;
+    white-space: pre-wrap;
+}
+.apidocFooterDiv {
+    margin-top: 20px;
+    text-align: center;
+}
+.apidocModuleLi {
+    margin-top: 10px;
+}
+.apidocSectionDiv {
+    border-top: 1px solid;
+    margin-top: 20px;
+}
+.apidocSignatureSpan {
+    color: #777;
+    font-weight: bold;
+}
+</style>
+<h1>api documentation for
+    <a href="https://github.com/lelylan/simple-oauth2">simple-oauth2 (v1.1.0)</a>
+</h1>
+<h4>Node.js client for OAuth2</h4>
+<div class="apidocSectionDiv"><a href="#apidoc.tableOfContents" id="apidoc.tableOfContents"><h1>table of contents</h1></a><ol>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.simple-oauth2">module simple-oauth2</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.simple-oauth2.create">
+            function <span class="apidocSignatureSpan">simple-oauth2.</span>create
+            <span class="apidocSignatureSpan">(options)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">simple-oauth2.</span>utils</span>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.simple-oauth2.utils">module simple-oauth2.utils</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.simple-oauth2.utils.getAuthorizationHeaderToken">
+            function <span class="apidocSignatureSpan">simple-oauth2.utils.</span>getAuthorizationHeaderToken
+            <span class="apidocSignatureSpan">(clientID, clientSecret)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+</ol></div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.simple-oauth2" id="apidoc.module.simple-oauth2">module simple-oauth2</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.simple-oauth2.create" id="apidoc.element.simple-oauth2.create">
+        function <span class="apidocSignatureSpan">simple-oauth2.</span>create
+        <span class="apidocSignatureSpan">(options)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">create(options) {
+  let moduleOptions = Object.assign({}, options || {});
+  moduleOptions = joi.attempt(
+    moduleOptions,
+    optionsSchema,
+    'Invalid options provided to simple-oauth2.'
+  );
+
+  return {
+    authorizationCode: authCodeModule(moduleOptions),
+    ownerPassword: passwordModule(moduleOptions),
+    clientCredentials: clientCredentialsModule(moduleOptions),
+    accessToken: accessTokenModule(moduleOptions),
+  };
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+  },
+  auth: {
+    tokenHost: 'https://api.oauth.com'
+  }
+};
+
+// Initialize the OAuth2 Library
+const oauth2 = require('simple-oauth2').<span class="apidocCodeKeywordSpan">create</span>(credentials);
+```
+
+### Example of Usage
+See the [example folder](./example).
+
+## OAuth2 Supported flows
+### Authorization Code flow
+...</pre></li>
+    </ul>
+
+
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.simple-oauth2.utils" id="apidoc.module.simple-oauth2.utils">module simple-oauth2.utils</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.simple-oauth2.utils.getAuthorizationHeaderToken" id="apidoc.element.simple-oauth2.utils.getAuthorizationHeaderToken">
+        function <span class="apidocSignatureSpan">simple-oauth2.utils.</span>getAuthorizationHeaderToken
+        <span class="apidocSignatureSpan">(clientID, clientSecret)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">getAuthorizationHeaderToken(clientID, clientSecret) {
+  return new Buffer(`${clientID}:${clientSecret}`).toString('base64');
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+
+  delete params.access_token;
+
+// oauth2 server call used to retrieve a valid token
+} else if (config.options.useBasicAuthorizationHeader &amp;&amp;
+  config.client.id &amp;&amp;
+  !params[config.client.idParamName]) {
+  const basicHeader = utils.<span class="apidocCodeKeywordSpan">getAuthorizationHeaderToken</span>(config.client.id, config.client
+.secret);
+  options.headers.Authorization = `Basic ${basicHeader}`;
+}
+
+if (Object.keys(params).length === 0) params = null;
+if (method !== 'GET') {
+  if (config.options.bodyFormat === 'form') {
+    options.form = params;
+...</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocFooterDiv">
+    [ this document was created with
+    <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a>
+    ]
+</div>
+</div>
+</body></html>
